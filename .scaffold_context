@@ -1,0 +1,1132 @@
+# Scaffold Context — Generated File Contents
+
+These files are pre-generated. Do NOT Read them — their contents are below.
+EXCEPTION: DashboardOverview.tsx is NOT included here. You MUST Read it with the Read tool before Write.
+Your job: Analyze data (1-2 sentences), Edit Layout.tsx (title), Read then Write DashboardOverview.tsx (once), Deploy.
+index.css is pre-generated with the shared design system. Do NOT edit it.
+src/config/ai-features.ts is editable — set AI_PHOTO_SCAN['Entity'] = true to enable photo scan in dialogs.
+NEVER use Bash cat/echo/heredoc for file operations — always use Read/Write/Edit tools.
+
+Generated 35 scaffold files:
+  - src/App.tsx
+  - src/components/Layout.tsx
+  - src/components/PageShell.tsx
+  - src/pages/DashboardOverview.tsx
+  - src/components/ConfirmDialog.tsx
+  - src/components/StatCard.tsx
+  - src/index.css
+  - src/lib/ai.ts
+  - src/lib/chat-context.ts
+  - src/components/ChatWidget.tsx
+  - src/config/ai-features.ts
+  - src/lib/formatters.ts
+  - src/hooks/useDashboardData.ts
+  - src/types/enriched.ts
+  - src/lib/enrich.ts
+  - src/pages/MitarbeiterPage.tsx
+  - src/components/dialogs/MitarbeiterDialog.tsx
+  - src/pages/ProduktionsbereichPage.tsx
+  - src/components/dialogs/ProduktionsbereichDialog.tsx
+  - src/pages/AnlagenteiltypPage.tsx
+  - src/components/dialogs/AnlagenteiltypDialog.tsx
+  - src/pages/AnlagePage.tsx
+  - src/components/dialogs/AnlageDialog.tsx
+  - src/pages/AnlagenteilPage.tsx
+  - src/components/dialogs/AnlagenteilDialog.tsx
+  - src/pages/BaugruppePage.tsx
+  - src/components/dialogs/BaugruppeDialog.tsx
+  - src/pages/StoerungsmeldungPage.tsx
+  - src/components/dialogs/StoerungsmeldungDialog.tsx
+  - src/pages/KorrespondenzPage.tsx
+  - src/components/dialogs/KorrespondenzDialog.tsx
+  - src/pages/NachrichtenPage.tsx
+  - src/components/dialogs/NachrichtenDialog.tsx
+  - src/pages/DetailsPage.tsx
+  - src/components/dialogs/DetailsDialog.tsx
+
+## src/types/app.ts
+```
+// AUTOMATICALLY GENERATED TYPES - DO NOT EDIT
+
+export interface Mitarbeiter {
+  record_id: string;
+  createdat: string;
+  updatedat: string | null;
+  fields: {
+    mitarbeiter_vorname?: string;
+    mitarbeiter_nachname?: string;
+    e_mail?: string;
+  };
+}
+
+export interface Produktionsbereich {
+  record_id: string;
+  createdat: string;
+  updatedat: string | null;
+  fields: {
+    produktionsbereich_name?: string;
+  };
+}
+
+export interface Anlagenteiltyp {
+  record_id: string;
+  createdat: string;
+  updatedat: string | null;
+  fields: {
+    anlagenteiltyp_name?: string;
+  };
+}
+
+export interface Anlage {
+  record_id: string;
+  createdat: string;
+  updatedat: string | null;
+  fields: {
+    anlage_name?: string;
+    anlage_produktionsbereich?: string; // applookup -> URL zu 'Produktionsbereich' Record
+    anlage_geo?: string;
+    anlage_betriebsstunden?: string;
+    anlage_fertigstellung?: string; // Format: YYYY-MM-DD oder ISO String
+  };
+}
+
+export interface Anlagenteil {
+  record_id: string;
+  createdat: string;
+  updatedat: string | null;
+  fields: {
+    anlagenteil_name?: string;
+    typ?: string; // applookup -> URL zu 'Anlagenteiltyp' Record
+    anlagenteil_anlage?: string; // applookup -> URL zu 'Anlage' Record
+    anlagenteil_geo?: string;
+    anlagenteil_verbaut_am?: string; // Format: YYYY-MM-DD oder ISO String
+  };
+}
+
+export interface Baugruppe {
+  record_id: string;
+  createdat: string;
+  updatedat: string | null;
+  fields: {
+    baugruppe_name?: string;
+    baugruppe_anlagenteil?: string; // applookup -> URL zu 'Anlagenteil' Record
+    baugruppe_anlagenteiltyp?: string; // applookup -> URL zu 'Anlagenteiltyp' Record
+  };
+}
+
+export interface Stoerungsmeldung {
+  record_id: string;
+  createdat: string;
+  updatedat: string | null;
+  fields: {
+    stoerungsmeldung_datum?: string; // Format: YYYY-MM-DD oder ISO String
+    stoerungsmeldung_erfasser?: string; // applookup -> URL zu 'Mitarbeiter' Record
+    stoerungsmeldung_standort?: string;
+    stoerungsmeldung_produktionsbereich?: string; // applookup -> URL zu 'Produktionsbereich' Record
+    stoerungsmeldung_anlage?: string; // applookup -> URL zu 'Anlage' Record
+    stoerungsmeldung_anlagenteil?: string; // applookup -> URL zu 'Anlagenteil' Record
+    stoerungsmeldung_baugruppe?: string; // applookup -> URL zu 'Baugruppe' Record
+    stoerungsmeldung_beschreibung?: string;
+    stoerungsmeldung_foto?: string;
+    stoerungsmeldung_dringlichkeit?: string;
+    erledigt?: boolean;
+  };
+}
+
+export interface Korrespondenz {
+  record_id: string;
+  createdat: string;
+  updatedat: string | null;
+  fields: {
+    edit_key_1?: string;
+    edit_key_2?: string;
+    edit_key_timeout_1?: string; // Format: YYYY-MM-DD oder ISO String
+    edit_key_timeout_2?: string; // Format: YYYY-MM-DD oder ISO String
+    titel?: string;
+    thema?: string;
+    e_mail_adresse_1?: string;
+    e_mail_adresse_2?: string;
+    label_mine_1?: string;
+    label_mine_2?: string;
+    label_yours_1?: string;
+    label_yours_2?: string;
+    icon_1?: string;
+    icon_2?: string;
+    stoerungsmeldung?: string; // applookup -> URL zu 'Stoerungsmeldung' Record
+  };
+}
+
+export interface Nachrichten {
+  record_id: string;
+  createdat: string;
+  updatedat: string | null;
+  fields: {
+    anonyme_kommunikation?: string; // applookup -> URL zu 'Korrespondenz' Record
+    ersteller2?: string;
+    text?: string;
+    datei?: string;
+  };
+}
+
+export interface Details {
+  record_id: string;
+  createdat: string;
+  updatedat: string | null;
+  fields: {
+    produktionsbereich?: string; // applookup -> URL zu 'Produktionsbereich' Record
+    stoerungsmeldung_anlage?: string; // applookup -> URL zu 'Anlage' Record
+    anlagenteiltyp?: string; // applookup -> URL zu 'Anlagenteiltyp' Record
+    anlagenteil?: string; // applookup -> URL zu 'Anlagenteil' Record
+    baugruppe?: string; // applookup -> URL zu 'Baugruppe' Record
+    bezeichnung?: string;
+    beschreibung?: string;
+    datei?: string;
+  };
+}
+
+export const APP_IDS = {
+  MITARBEITER: '69a551fea295faaf45637a1f',
+  PRODUKTIONSBEREICH: '69a55219f7e40ead165dd87d',
+  ANLAGENTEILTYP: '69a55219448919e103c17a3e',
+  ANLAGE: '69a5521aa86e8990e3edd8e9',
+  ANLAGENTEIL: '69a5521befef6527309e4870',
+  BAUGRUPPE: '69a5521bc003cdee43cb3e8f',
+  STOERUNGSMELDUNG: '69a5521c764e564160089811',
+  KORRESPONDENZ: '69a5521ddaf2514c6dff7fc6',
+  NACHRICHTEN: '69a5521e6c124ffb6cc73c13',
+  DETAILS: '69a5521f387532711a4395fa',
+} as const;
+
+// Helper Types for creating new records
+export type CreateMitarbeiter = Mitarbeiter['fields'];
+export type CreateProduktionsbereich = Produktionsbereich['fields'];
+export type CreateAnlagenteiltyp = Anlagenteiltyp['fields'];
+export type CreateAnlage = Anlage['fields'];
+export type CreateAnlagenteil = Anlagenteil['fields'];
+export type CreateBaugruppe = Baugruppe['fields'];
+export type CreateStoerungsmeldung = Stoerungsmeldung['fields'];
+export type CreateKorrespondenz = Korrespondenz['fields'];
+export type CreateNachrichten = Nachrichten['fields'];
+export type CreateDetails = Details['fields'];
+```
+
+## src/services/livingAppsService.ts
+```
+// AUTOMATICALLY GENERATED SERVICE
+import { APP_IDS } from '@/types/app';
+import type { Mitarbeiter, Produktionsbereich, Anlagenteiltyp, Anlage, Anlagenteil, Baugruppe, Stoerungsmeldung, Korrespondenz, Nachrichten, Details } from '@/types/app';
+
+// Base Configuration
+const API_BASE_URL = 'https://ci04.ci.xist4c.de/rest';
+
+// --- HELPER FUNCTIONS ---
+export function extractRecordId(url: string | null | undefined): string | null {
+  if (!url) return null;
+  // Extrahiere die letzten 24 Hex-Zeichen mit Regex
+  const match = url.match(/([a-f0-9]{24})$/i);
+  return match ? match[1] : null;
+}
+
+export function createRecordUrl(appId: string, recordId: string): string {
+  return `https://ci04.ci.xist4c.de/rest/apps/${appId}/records/${recordId}`;
+}
+
+async function callApi(method: string, endpoint: string, data?: any) {
+  const response = await fetch(`${API_BASE_URL}${endpoint}`, {
+    method,
+    headers: { 'Content-Type': 'application/json' },
+    credentials: 'include',  // Nutze Session Cookies für Auth
+    body: data ? JSON.stringify(data) : undefined
+  });
+  if (!response.ok) throw new Error(await response.text());
+  // DELETE returns often empty body or simple status
+  if (method === 'DELETE') return true;
+  return response.json();
+}
+
+export class LivingAppsService {
+  // --- MITARBEITER ---
+  static async getMitarbeiter(): Promise<Mitarbeiter[]> {
+    const data = await callApi('GET', `/apps/${APP_IDS.MITARBEITER}/records`);
+    return Object.entries(data).map(([id, rec]: [string, any]) => ({
+      record_id: id, ...rec
+    }));
+  }
+  static async getMitarbeiterEntry(id: string): Promise<Mitarbeiter | undefined> {
+    const data = await callApi('GET', `/apps/${APP_IDS.MITARBEITER}/records/${id}`);
+    return { record_id: data.id, ...data };
+  }
+  static async createMitarbeiterEntry(fields: Mitarbeiter['fields']) {
+    return callApi('POST', `/apps/${APP_IDS.MITARBEITER}/records`, { fields });
+  }
+  static async updateMitarbeiterEntry(id: string, fields: Partial<Mitarbeiter['fields']>) {
+    return callApi('PATCH', `/apps/${APP_IDS.MITARBEITER}/records/${id}`, { fields });
+  }
+  static async deleteMitarbeiterEntry(id: string) {
+    return callApi('DELETE', `/apps/${APP_IDS.MITARBEITER}/records/${id}`);
+  }
+
+  // --- PRODUKTIONSBEREICH ---
+  static async getProduktionsbereich(): Promise<Produktionsbereich[]> {
+    const data = await callApi('GET', `/apps/${APP_IDS.PRODUKTIONSBEREICH}/records`);
+    return Object.entries(data).map(([id, rec]: [string, any]) => ({
+      record_id: id, ...rec
+    }));
+  }
+  static async getProduktionsbereichEntry(id: string): Promise<Produktionsbereich | undefined> {
+    const data = await callApi('GET', `/apps/${APP_IDS.PRODUKTIONSBEREICH}/records/${id}`);
+    return { record_id: data.id, ...data };
+  }
+  static async createProduktionsbereichEntry(fields: Produktionsbereich['fields']) {
+    return callApi('POST', `/apps/${APP_IDS.PRODUKTIONSBEREICH}/records`, { fields });
+  }
+  static async updateProduktionsbereichEntry(id: string, fields: Partial<Produktionsbereich['fields']>) {
+    return callApi('PATCH', `/apps/${APP_IDS.PRODUKTIONSBEREICH}/records/${id}`, { fields });
+  }
+  static async deleteProduktionsbereichEntry(id: string) {
+    return callApi('DELETE', `/apps/${APP_IDS.PRODUKTIONSBEREICH}/records/${id}`);
+  }
+
+  // --- ANLAGENTEILTYP ---
+  static async getAnlagenteiltyp(): Promise<Anlagenteiltyp[]> {
+    const data = await callApi('GET', `/apps/${APP_IDS.ANLAGENTEILTYP}/records`);
+    return Object.entries(data).map(([id, rec]: [string, any]) => ({
+      record_id: id, ...rec
+    }));
+  }
+  static async getAnlagenteiltypEntry(id: string): Promise<Anlagenteiltyp | undefined> {
+    const data = await callApi('GET', `/apps/${APP_IDS.ANLAGENTEILTYP}/records/${id}`);
+    return { record_id: data.id, ...data };
+  }
+  static async createAnlagenteiltypEntry(fields: Anlagenteiltyp['fields']) {
+    return callApi('POST', `/apps/${APP_IDS.ANLAGENTEILTYP}/records`, { fields });
+  }
+  static async updateAnlagenteiltypEntry(id: string, fields: Partial<Anlagenteiltyp['fields']>) {
+    return callApi('PATCH', `/apps/${APP_IDS.ANLAGENTEILTYP}/records/${id}`, { fields });
+  }
+  static async deleteAnlagenteiltypEntry(id: string) {
+    return callApi('DELETE', `/apps/${APP_IDS.ANLAGENTEILTYP}/records/${id}`);
+  }
+
+  // --- ANLAGE ---
+  static async getAnlage(): Promise<Anlage[]> {
+    const data = await callApi('GET', `/apps/${APP_IDS.ANLAGE}/records`);
+    return Object.entries(data).map(([id, rec]: [string, any]) => ({
+      record_id: id, ...rec
+    }));
+  }
+  static async getAnlageEntry(id: string): Promise<Anlage | undefined> {
+    const data = await callApi('GET', `/apps/${APP_IDS.ANLAGE}/records/${id}`);
+    return { record_id: data.id, ...data };
+  }
+  static async createAnlageEntry(fields: Anlage['fields']) {
+    return callApi('POST', `/apps/${APP_IDS.ANLAGE}/records`, { fields });
+  }
+  static async updateAnlageEntry(id: string, fields: Partial<Anlage['fields']>) {
+    return callApi('PATCH', `/apps/${APP_IDS.ANLAGE}/records/${id}`, { fields });
+  }
+  static async deleteAnlageEntry(id: string) {
+    return callApi('DELETE', `/apps/${APP_IDS.ANLAGE}/records/${id}`);
+  }
+
+  // --- ANLAGENTEIL ---
+  static async getAnlagenteil(): Promise<Anlagenteil[]> {
+    const data = await callApi('GET', `/apps/${APP_IDS.ANLAGENTEIL}/records`);
+    return Object.entries(data).map(([id, rec]: [string, any]) => ({
+      record_id: id, ...rec
+    }));
+  }
+  static async getAnlagenteilEntry(id: string): Promise<Anlagenteil | undefined> {
+    const data = await callApi('GET', `/apps/${APP_IDS.ANLAGENTEIL}/records/${id}`);
+    return { record_id: data.id, ...data };
+  }
+  static async createAnlagenteilEntry(fields: Anlagenteil['fields']) {
+    return callApi('POST', `/apps/${APP_IDS.ANLAGENTEIL}/records`, { fields });
+  }
+  static async updateAnlagenteilEntry(id: string, fields: Partial<Anlagenteil['fields']>) {
+    return callApi('PATCH', `/apps/${APP_IDS.ANLAGENTEIL}/records/${id}`, { fields });
+  }
+  static async deleteAnlagenteilEntry(id: string) {
+    return callApi('DELETE', `/apps/${APP_IDS.ANLAGENTEIL}/records/${id}`);
+  }
+
+  // --- BAUGRUPPE ---
+  static async getBaugruppe(): Promise<Baugruppe[]> {
+    const data = await callApi('GET', `/apps/${APP_IDS.BAUGRUPPE}/records`);
+    return Object.entries(data).map(([id, rec]: [string, any]) => ({
+      record_id: id, ...rec
+    }));
+  }
+  static async getBaugruppeEntry(id: string): Promise<Baugruppe | undefined> {
+    const data = await callApi('GET', `/apps/${APP_IDS.BAUGRUPPE}/records/${id}`);
+    return { record_id: data.id, ...data };
+  }
+  static async createBaugruppeEntry(fields: Baugruppe['fields']) {
+    return callApi('POST', `/apps/${APP_IDS.BAUGRUPPE}/records`, { fields });
+  }
+  static async updateBaugruppeEntry(id: string, fields: Partial<Baugruppe['fields']>) {
+    return callApi('PATCH', `/apps/${APP_IDS.BAUGRUPPE}/records/${id}`, { fields });
+  }
+  static async deleteBaugruppeEntry(id: string) {
+    return callApi('DELETE', `/apps/${APP_IDS.BAUGRUPPE}/records/${id}`);
+  }
+
+  // --- STOERUNGSMELDUNG ---
+  static async getStoerungsmeldung(): Promise<Stoerungsmeldung[]> {
+    const data = await callApi('GET', `/apps/${APP_IDS.STOERUNGSMELDUNG}/records`);
+    return Object.entries(data).map(([id, rec]: [string, any]) => ({
+      record_id: id, ...rec
+    }));
+  }
+  static async getStoerungsmeldungEntry(id: string): Promise<Stoerungsmeldung | undefined> {
+    const data = await callApi('GET', `/apps/${APP_IDS.STOERUNGSMELDUNG}/records/${id}`);
+    return { record_id: data.id, ...data };
+  }
+  static async createStoerungsmeldungEntry(fields: Stoerungsmeldung['fields']) {
+    return callApi('POST', `/apps/${APP_IDS.STOERUNGSMELDUNG}/records`, { fields });
+  }
+  static async updateStoerungsmeldungEntry(id: string, fields: Partial<Stoerungsmeldung['fields']>) {
+    return callApi('PATCH', `/apps/${APP_IDS.STOERUNGSMELDUNG}/records/${id}`, { fields });
+  }
+  static async deleteStoerungsmeldungEntry(id: string) {
+    return callApi('DELETE', `/apps/${APP_IDS.STOERUNGSMELDUNG}/records/${id}`);
+  }
+
+  // --- KORRESPONDENZ ---
+  static async getKorrespondenz(): Promise<Korrespondenz[]> {
+    const data = await callApi('GET', `/apps/${APP_IDS.KORRESPONDENZ}/records`);
+    return Object.entries(data).map(([id, rec]: [string, any]) => ({
+      record_id: id, ...rec
+    }));
+  }
+  static async getKorrespondenzEntry(id: string): Promise<Korrespondenz | undefined> {
+    const data = await callApi('GET', `/apps/${APP_IDS.KORRESPONDENZ}/records/${id}`);
+    return { record_id: data.id, ...data };
+  }
+  static async createKorrespondenzEntry(fields: Korrespondenz['fields']) {
+    return callApi('POST', `/apps/${APP_IDS.KORRESPONDENZ}/records`, { fields });
+  }
+  static async updateKorrespondenzEntry(id: string, fields: Partial<Korrespondenz['fields']>) {
+    return callApi('PATCH', `/apps/${APP_IDS.KORRESPONDENZ}/records/${id}`, { fields });
+  }
+  static async deleteKorrespondenzEntry(id: string) {
+    return callApi('DELETE', `/apps/${APP_IDS.KORRESPONDENZ}/records/${id}`);
+  }
+
+  // --- NACHRICHTEN ---
+  static async getNachrichten(): Promise<Nachrichten[]> {
+    const data = await callApi('GET', `/apps/${APP_IDS.NACHRICHTEN}/records`);
+    return Object.entries(data).map(([id, rec]: [string, any]) => ({
+      record_id: id, ...rec
+    }));
+  }
+  static async getNachrichtenEntry(id: string): Promise<Nachrichten | undefined> {
+    const data = await callApi('GET', `/apps/${APP_IDS.NACHRICHTEN}/records/${id}`);
+    return { record_id: data.id, ...data };
+  }
+  static async createNachrichtenEntry(fields: Nachrichten['fields']) {
+    return callApi('POST', `/apps/${APP_IDS.NACHRICHTEN}/records`, { fields });
+  }
+  static async updateNachrichtenEntry(id: string, fields: Partial<Nachrichten['fields']>) {
+    return callApi('PATCH', `/apps/${APP_IDS.NACHRICHTEN}/records/${id}`, { fields });
+  }
+  static async deleteNachrichtenEntry(id: string) {
+    return callApi('DELETE', `/apps/${APP_IDS.NACHRICHTEN}/records/${id}`);
+  }
+
+  // --- DETAILS ---
+  static async getDetails(): Promise<Details[]> {
+    const data = await callApi('GET', `/apps/${APP_IDS.DETAILS}/records`);
+    return Object.entries(data).map(([id, rec]: [string, any]) => ({
+      record_id: id, ...rec
+    }));
+  }
+  static async getDetail(id: string): Promise<Details | undefined> {
+    const data = await callApi('GET', `/apps/${APP_IDS.DETAILS}/records/${id}`);
+    return { record_id: data.id, ...data };
+  }
+  static async createDetail(fields: Details['fields']) {
+    return callApi('POST', `/apps/${APP_IDS.DETAILS}/records`, { fields });
+  }
+  static async updateDetail(id: string, fields: Partial<Details['fields']>) {
+    return callApi('PATCH', `/apps/${APP_IDS.DETAILS}/records/${id}`, { fields });
+  }
+  static async deleteDetail(id: string) {
+    return callApi('DELETE', `/apps/${APP_IDS.DETAILS}/records/${id}`);
+  }
+
+}
+```
+
+## src/App.tsx
+```
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import { Layout } from '@/components/Layout';
+import DashboardOverview from '@/pages/DashboardOverview';
+import MitarbeiterPage from '@/pages/MitarbeiterPage';
+import ProduktionsbereichPage from '@/pages/ProduktionsbereichPage';
+import AnlagenteiltypPage from '@/pages/AnlagenteiltypPage';
+import AnlagePage from '@/pages/AnlagePage';
+import AnlagenteilPage from '@/pages/AnlagenteilPage';
+import BaugruppePage from '@/pages/BaugruppePage';
+import StoerungsmeldungPage from '@/pages/StoerungsmeldungPage';
+import KorrespondenzPage from '@/pages/KorrespondenzPage';
+import NachrichtenPage from '@/pages/NachrichtenPage';
+import DetailsPage from '@/pages/DetailsPage';
+
+export default function App() {
+  return (
+    <BrowserRouter basename={import.meta.env.BASE_URL}>
+      <Routes>
+        <Route element={<Layout />}>
+          <Route index element={<DashboardOverview />} />
+          <Route path="mitarbeiter" element={<MitarbeiterPage />} />
+          <Route path="produktionsbereich" element={<ProduktionsbereichPage />} />
+          <Route path="anlagenteiltyp" element={<AnlagenteiltypPage />} />
+          <Route path="anlage" element={<AnlagePage />} />
+          <Route path="anlagenteil" element={<AnlagenteilPage />} />
+          <Route path="baugruppe" element={<BaugruppePage />} />
+          <Route path="stoerungsmeldung" element={<StoerungsmeldungPage />} />
+          <Route path="korrespondenz" element={<KorrespondenzPage />} />
+          <Route path="nachrichten" element={<NachrichtenPage />} />
+          <Route path="details" element={<DetailsPage />} />
+        </Route>
+      </Routes>
+    </BrowserRouter>
+  );
+}
+```
+
+## src/components/Layout.tsx
+```
+import { NavLink, Outlet } from 'react-router-dom';
+import { FileText, LayoutDashboard, Menu, Package, Tag, Users, X } from 'lucide-react';
+import { useState } from 'react';
+import ChatWidget from '@/components/ChatWidget';
+
+// ⚡ Customize these for your app
+const APP_TITLE = 'Dashboard';
+const APP_SUBTITLE = 'Verwaltung';
+
+const navigation = [
+  { name: 'Übersicht', href: '/', icon: LayoutDashboard },
+  { name: 'Mitarbeiter', href: '/mitarbeiter', icon: Users },
+  { name: 'Produktionsbereich', href: '/produktionsbereich', icon: Package },
+  { name: 'Anlagenteiltyp', href: '/anlagenteiltyp', icon: Tag },
+  { name: 'Anlage', href: '/anlage', icon: FileText },
+  { name: 'Anlagenteil', href: '/anlagenteil', icon: FileText },
+  { name: 'Baugruppe', href: '/baugruppe', icon: FileText },
+  { name: 'Störungsmeldung', href: '/stoerungsmeldung', icon: FileText },
+  { name: 'Korrespondenz', href: '/korrespondenz', icon: FileText },
+  { name: 'Nachrichten', href: '/nachrichten', icon: FileText },
+  { name: 'Details', href: '/details', icon: FileText },
+];
+
+export function Layout() {
+  const [sidebarOpen, setSidebarOpen] = useState(false);
+
+  return (
+    <div className="min-h-screen bg-background">
+      {sidebarOpen && (
+        <div
+          className="fixed inset-0 bg-black/50 backdrop-blur-sm z-40 lg:hidden"
+          onClick={() => setSidebarOpen(false)}
+        />
+      )}
+
+      <aside
+        className={`
+          fixed top-0 left-0 z-50 h-full w-64 bg-sidebar border-r border-sidebar-border
+          transform transition-transform duration-200 ease-in-out
+          ${sidebarOpen ? 'translate-x-0' : '-translate-x-full'}
+          lg:translate-x-0
+        `}
+      >
+        <div className="flex items-center justify-between px-5 py-6 border-b border-sidebar-border">
+          <div className="flex items-center gap-3">
+            <div className="w-9 h-9 rounded-xl bg-sidebar-primary flex items-center justify-center shadow-sm">
+              <Users size={16} className="text-sidebar-primary-foreground" />
+            </div>
+            <div>
+              <h1 className="text-sm font-bold tracking-tight text-sidebar-foreground">{APP_TITLE}</h1>
+              <p className="text-xs text-sidebar-foreground/60">{APP_SUBTITLE}</p>
+            </div>
+          </div>
+          <button
+            className="lg:hidden p-1.5 rounded-lg text-sidebar-foreground/60 hover:text-sidebar-foreground transition-colors"
+            onClick={() => setSidebarOpen(false)}
+          >
+            <X size={16} />
+          </button>
+        </div>
+        <nav className="px-3 pt-4 space-y-0.5">
+          <p className="px-3 pb-2 text-xs font-semibold uppercase tracking-widest text-sidebar-foreground/40">
+            Navigation
+          </p>
+          {navigation.map(item => (
+            <NavLink
+              key={item.href}
+              to={item.href}
+              end={item.href === '/'}
+              onClick={() => setSidebarOpen(false)}
+              className={({ isActive }: { isActive: boolean }) =>
+                `flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium transition-colors ${
+                  isActive
+                    ? 'bg-sidebar-primary text-sidebar-primary-foreground shadow-sm'
+                    : 'text-sidebar-foreground/70 hover:bg-sidebar-accent hover:text-sidebar-accent-foreground'
+                }`
+              }
+            >
+              <item.icon size={16} className="shrink-0" />
+              {item.name}
+            </NavLink>
+          ))}
+        </nav>
+      </aside>
+
+      <div className="lg:pl-64">
+        <header className="lg:hidden flex items-center gap-4 px-4 py-3 border-b bg-card sticky top-0 z-30">
+          <button
+            className="p-2 rounded-lg hover:bg-accent transition-colors"
+            onClick={() => setSidebarOpen(true)}
+          >
+            <Menu size={18} />
+          </button>
+          <span className="font-semibold text-sm">{APP_TITLE}</span>
+        </header>
+        <main className="p-6 lg:p-8 max-w-screen-2xl">
+          <Outlet />
+        </main>
+      </div>
+
+      <ChatWidget />
+    </div>
+  );
+}
+```
+
+## src/hooks/useDashboardData.ts
+```
+import { useState, useEffect, useMemo, useCallback } from 'react';
+import type { Mitarbeiter, Produktionsbereich, Anlagenteiltyp, Anlage, Anlagenteil, Baugruppe, Stoerungsmeldung, Korrespondenz, Nachrichten, Details } from '@/types/app';
+import { LivingAppsService } from '@/services/livingAppsService';
+
+export function useDashboardData() {
+  const [mitarbeiter, setMitarbeiter] = useState<Mitarbeiter[]>([]);
+  const [produktionsbereich, setProduktionsbereich] = useState<Produktionsbereich[]>([]);
+  const [anlagenteiltyp, setAnlagenteiltyp] = useState<Anlagenteiltyp[]>([]);
+  const [anlage, setAnlage] = useState<Anlage[]>([]);
+  const [anlagenteil, setAnlagenteil] = useState<Anlagenteil[]>([]);
+  const [baugruppe, setBaugruppe] = useState<Baugruppe[]>([]);
+  const [stoerungsmeldung, setStoerungsmeldung] = useState<Stoerungsmeldung[]>([]);
+  const [korrespondenz, setKorrespondenz] = useState<Korrespondenz[]>([]);
+  const [nachrichten, setNachrichten] = useState<Nachrichten[]>([]);
+  const [details, setDetails] = useState<Details[]>([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<Error | null>(null);
+
+  const fetchAll = useCallback(async () => {
+    setError(null);
+    try {
+      const [mitarbeiterData, produktionsbereichData, anlagenteiltypData, anlageData, anlagenteilData, baugruppeData, stoerungsmeldungData, korrespondenzData, nachrichtenData, detailsData] = await Promise.all([
+        LivingAppsService.getMitarbeiter(),
+        LivingAppsService.getProduktionsbereich(),
+        LivingAppsService.getAnlagenteiltyp(),
+        LivingAppsService.getAnlage(),
+        LivingAppsService.getAnlagenteil(),
+        LivingAppsService.getBaugruppe(),
+        LivingAppsService.getStoerungsmeldung(),
+        LivingAppsService.getKorrespondenz(),
+        LivingAppsService.getNachrichten(),
+        LivingAppsService.getDetails(),
+      ]);
+      setMitarbeiter(mitarbeiterData);
+      setProduktionsbereich(produktionsbereichData);
+      setAnlagenteiltyp(anlagenteiltypData);
+      setAnlage(anlageData);
+      setAnlagenteil(anlagenteilData);
+      setBaugruppe(baugruppeData);
+      setStoerungsmeldung(stoerungsmeldungData);
+      setKorrespondenz(korrespondenzData);
+      setNachrichten(nachrichtenData);
+      setDetails(detailsData);
+    } catch (err) {
+      setError(err instanceof Error ? err : new Error('Fehler beim Laden der Daten'));
+    } finally {
+      setLoading(false);
+    }
+  }, []);
+
+  useEffect(() => { fetchAll(); }, [fetchAll]);
+
+  const mitarbeiterMap = useMemo(() => {
+    const m = new Map<string, Mitarbeiter>();
+    mitarbeiter.forEach(r => m.set(r.record_id, r));
+    return m;
+  }, [mitarbeiter]);
+
+  const produktionsbereichMap = useMemo(() => {
+    const m = new Map<string, Produktionsbereich>();
+    produktionsbereich.forEach(r => m.set(r.record_id, r));
+    return m;
+  }, [produktionsbereich]);
+
+  const anlagenteiltypMap = useMemo(() => {
+    const m = new Map<string, Anlagenteiltyp>();
+    anlagenteiltyp.forEach(r => m.set(r.record_id, r));
+    return m;
+  }, [anlagenteiltyp]);
+
+  const anlageMap = useMemo(() => {
+    const m = new Map<string, Anlage>();
+    anlage.forEach(r => m.set(r.record_id, r));
+    return m;
+  }, [anlage]);
+
+  const anlagenteilMap = useMemo(() => {
+    const m = new Map<string, Anlagenteil>();
+    anlagenteil.forEach(r => m.set(r.record_id, r));
+    return m;
+  }, [anlagenteil]);
+
+  const baugruppeMap = useMemo(() => {
+    const m = new Map<string, Baugruppe>();
+    baugruppe.forEach(r => m.set(r.record_id, r));
+    return m;
+  }, [baugruppe]);
+
+  const stoerungsmeldungMap = useMemo(() => {
+    const m = new Map<string, Stoerungsmeldung>();
+    stoerungsmeldung.forEach(r => m.set(r.record_id, r));
+    return m;
+  }, [stoerungsmeldung]);
+
+  const korrespondenzMap = useMemo(() => {
+    const m = new Map<string, Korrespondenz>();
+    korrespondenz.forEach(r => m.set(r.record_id, r));
+    return m;
+  }, [korrespondenz]);
+
+  return { mitarbeiter, setMitarbeiter, produktionsbereich, setProduktionsbereich, anlagenteiltyp, setAnlagenteiltyp, anlage, setAnlage, anlagenteil, setAnlagenteil, baugruppe, setBaugruppe, stoerungsmeldung, setStoerungsmeldung, korrespondenz, setKorrespondenz, nachrichten, setNachrichten, details, setDetails, loading, error, fetchAll, mitarbeiterMap, produktionsbereichMap, anlagenteiltypMap, anlageMap, anlagenteilMap, baugruppeMap, stoerungsmeldungMap, korrespondenzMap };
+}
+```
+
+## src/types/enriched.ts
+```
+import type { Anlage, Anlagenteil, Baugruppe, Details, Korrespondenz, Nachrichten, Stoerungsmeldung } from './app';
+
+export type EnrichedAnlage = Anlage & {
+  anlage_produktionsbereichName: string;
+};
+
+export type EnrichedAnlagenteil = Anlagenteil & {
+  typName: string;
+  anlagenteil_anlageName: string;
+};
+
+export type EnrichedBaugruppe = Baugruppe & {
+  baugruppe_anlagenteilName: string;
+  baugruppe_anlagenteiltypName: string;
+};
+
+export type EnrichedStoerungsmeldung = Stoerungsmeldung & {
+  stoerungsmeldung_erfasserName: string;
+  stoerungsmeldung_produktionsbereichName: string;
+  stoerungsmeldung_anlageName: string;
+  stoerungsmeldung_anlagenteilName: string;
+  stoerungsmeldung_baugruppeName: string;
+};
+
+export type EnrichedKorrespondenz = Korrespondenz & {
+  stoerungsmeldungName: string;
+};
+
+export type EnrichedNachrichten = Nachrichten & {
+  anonyme_kommunikationName: string;
+};
+
+export type EnrichedDetails = Details & {
+  produktionsbereichName: string;
+  stoerungsmeldung_anlageName: string;
+  anlagenteiltypName: string;
+  anlagenteilName: string;
+  baugruppeName: string;
+};
+
+```
+
+## src/lib/enrich.ts
+```
+import type { EnrichedAnlage, EnrichedAnlagenteil, EnrichedBaugruppe, EnrichedDetails, EnrichedKorrespondenz, EnrichedNachrichten, EnrichedStoerungsmeldung } from '@/types/enriched';
+import type { Anlage, Anlagenteil, Anlagenteiltyp, Baugruppe, Details, Korrespondenz, Mitarbeiter, Nachrichten, Produktionsbereich, Stoerungsmeldung } from '@/types/app';
+import { extractRecordId } from '@/services/livingAppsService';
+
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+function resolveDisplay(url: string | undefined, map: Map<string, any>, ...fields: string[]): string {
+  if (!url) return '';
+  const id = extractRecordId(url);
+  if (!id) return '';
+  const r = map.get(id);
+  if (!r) return '';
+  return fields.map(f => String(r.fields[f] ?? '')).join(' ').trim();
+}
+
+interface AnlageMaps {
+  produktionsbereichMap: Map<string, Produktionsbereich>;
+}
+
+export function enrichAnlage(
+  anlage: Anlage[],
+  maps: AnlageMaps
+): EnrichedAnlage[] {
+  return anlage.map(r => ({
+    ...r,
+    anlage_produktionsbereichName: resolveDisplay(r.fields.anlage_produktionsbereich, maps.produktionsbereichMap, 'produktionsbereich_name'),
+  }));
+}
+
+interface AnlagenteilMaps {
+  anlagenteiltypMap: Map<string, Anlagenteiltyp>;
+  anlageMap: Map<string, Anlage>;
+}
+
+export function enrichAnlagenteil(
+  anlagenteil: Anlagenteil[],
+  maps: AnlagenteilMaps
+): EnrichedAnlagenteil[] {
+  return anlagenteil.map(r => ({
+    ...r,
+    typName: resolveDisplay(r.fields.typ, maps.anlagenteiltypMap, 'anlagenteiltyp_name'),
+    anlagenteil_anlageName: resolveDisplay(r.fields.anlagenteil_anlage, maps.anlageMap, 'anlage_name'),
+  }));
+}
+
+interface BaugruppeMaps {
+  anlagenteilMap: Map<string, Anlagenteil>;
+  anlagenteiltypMap: Map<string, Anlagenteiltyp>;
+}
+
+export function enrichBaugruppe(
+  baugruppe: Baugruppe[],
+  maps: BaugruppeMaps
+): EnrichedBaugruppe[] {
+  return baugruppe.map(r => ({
+    ...r,
+    baugruppe_anlagenteilName: resolveDisplay(r.fields.baugruppe_anlagenteil, maps.anlagenteilMap, 'anlagenteil_name'),
+    baugruppe_anlagenteiltypName: resolveDisplay(r.fields.baugruppe_anlagenteiltyp, maps.anlagenteiltypMap, 'anlagenteiltyp_name'),
+  }));
+}
+
+interface StoerungsmeldungMaps {
+  mitarbeiterMap: Map<string, Mitarbeiter>;
+  produktionsbereichMap: Map<string, Produktionsbereich>;
+  anlageMap: Map<string, Anlage>;
+  anlagenteilMap: Map<string, Anlagenteil>;
+  baugruppeMap: Map<string, Baugruppe>;
+}
+
+export function enrichStoerungsmeldung(
+  stoerungsmeldung: Stoerungsmeldung[],
+  maps: StoerungsmeldungMaps
+): EnrichedStoerungsmeldung[] {
+  return stoerungsmeldung.map(r => ({
+    ...r,
+    stoerungsmeldung_erfasserName: resolveDisplay(r.fields.stoerungsmeldung_erfasser, maps.mitarbeiterMap, 'mitarbeiter_vorname'),
+    stoerungsmeldung_produktionsbereichName: resolveDisplay(r.fields.stoerungsmeldung_produktionsbereich, maps.produktionsbereichMap, 'produktionsbereich_name'),
+    stoerungsmeldung_anlageName: resolveDisplay(r.fields.stoerungsmeldung_anlage, maps.anlageMap, 'anlage_name'),
+    stoerungsmeldung_anlagenteilName: resolveDisplay(r.fields.stoerungsmeldung_anlagenteil, maps.anlagenteilMap, 'anlagenteil_name'),
+    stoerungsmeldung_baugruppeName: resolveDisplay(r.fields.stoerungsmeldung_baugruppe, maps.baugruppeMap, 'baugruppe_name'),
+  }));
+}
+
+interface KorrespondenzMaps {
+  stoerungsmeldungMap: Map<string, Stoerungsmeldung>;
+}
+
+export function enrichKorrespondenz(
+  korrespondenz: Korrespondenz[],
+  maps: KorrespondenzMaps
+): EnrichedKorrespondenz[] {
+  return korrespondenz.map(r => ({
+    ...r,
+    stoerungsmeldungName: resolveDisplay(r.fields.stoerungsmeldung, maps.stoerungsmeldungMap, 'stoerungsmeldung_beschreibung'),
+  }));
+}
+
+interface NachrichtenMaps {
+  korrespondenzMap: Map<string, Korrespondenz>;
+}
+
+export function enrichNachrichten(
+  nachrichten: Nachrichten[],
+  maps: NachrichtenMaps
+): EnrichedNachrichten[] {
+  return nachrichten.map(r => ({
+    ...r,
+    anonyme_kommunikationName: resolveDisplay(r.fields.anonyme_kommunikation, maps.korrespondenzMap, 'edit_key_1'),
+  }));
+}
+
+interface DetailsMaps {
+  produktionsbereichMap: Map<string, Produktionsbereich>;
+  anlageMap: Map<string, Anlage>;
+  anlagenteiltypMap: Map<string, Anlagenteiltyp>;
+  anlagenteilMap: Map<string, Anlagenteil>;
+  baugruppeMap: Map<string, Baugruppe>;
+}
+
+export function enrichDetails(
+  details: Details[],
+  maps: DetailsMaps
+): EnrichedDetails[] {
+  return details.map(r => ({
+    ...r,
+    produktionsbereichName: resolveDisplay(r.fields.produktionsbereich, maps.produktionsbereichMap, 'produktionsbereich_name'),
+    stoerungsmeldung_anlageName: resolveDisplay(r.fields.stoerungsmeldung_anlage, maps.anlageMap, 'anlage_name'),
+    anlagenteiltypName: resolveDisplay(r.fields.anlagenteiltyp, maps.anlagenteiltypMap, 'anlagenteiltyp_name'),
+    anlagenteilName: resolveDisplay(r.fields.anlagenteil, maps.anlagenteilMap, 'anlagenteil_name'),
+    baugruppeName: resolveDisplay(r.fields.baugruppe, maps.baugruppeMap, 'baugruppe_name'),
+  }));
+}
+
+```
+
+## src/lib/formatters.ts
+```
+import { format, parseISO } from 'date-fns';
+import { de } from 'date-fns/locale';
+
+export function formatDate(s: string | undefined) {
+  if (!s) return '—';
+  try { return format(parseISO(s), 'dd.MM.yyyy', { locale: de }); } catch { return s; }
+}
+
+export function formatCurrency(v: number | undefined) {
+  if (v == null) return '—';
+  return new Intl.NumberFormat('de-DE', { style: 'currency', currency: 'EUR' }).format(v);
+}
+```
+
+## src/lib/ai.ts
+```
+const AI_ENDPOINT = "https://ci04.ci.xist4c.de/litellm/v1/chat/completions";
+const AI_MODEL = "default";
+
+export type ChatMessage = {
+  role: "system" | "user" | "assistant";
+  content: string | Array<{ type: string; [key: string]: unknown }>;
+};
+
+type CompletionOptions = {
+  temperature?: number;
+  max_tokens?: number;
+  top_p?: number;
+  stop?: string[];
+  response_format?: { type: string };
+};
+
+export async function chatCompletion(
+  messages: ChatMessage[],
+  options: CompletionOptions = {}
+): Promise<string> {
+  const res = await fetch(AI_ENDPOINT, {
+    method: "POST",
+    headers: { "Content-Type": "application/json", Accept: "application/json" },
+    body: JSON.stringify({ model: AI_MODEL, messages, ...options }),
+  });
+  if (!res.ok) {
+    const body = await res.text();
+    throw new Error(`AI API ${res.status}: ${body}`);
+  }
+  const data = await res.json();
+  return data.choices[0].message.content;
+}
+
+export async function safeJsonCompletion<T = unknown>(
+  messages: ChatMessage[],
+  options: CompletionOptions = {}
+): Promise<T> {
+  const raw = await chatCompletion(messages, options);
+  const match = raw.match(/\{[\s\S]*\}|\[[\s\S]*\]/);
+  if (!match) throw new Error(`Expected JSON but got: ${raw.slice(0, 200)}`);
+  return JSON.parse(match[0]);
+}
+
+export async function withRetry<T>(fn: () => Promise<T>, maxAttempts = 3): Promise<T> {
+  for (let attempt = 1; attempt <= maxAttempts; attempt++) {
+    try {
+      return await fn();
+    } catch (err) {
+      if (attempt === maxAttempts) throw err;
+      await new Promise((r) => setTimeout(r, 1000 * attempt));
+    }
+  }
+  throw new Error("unreachable");
+}
+
+// --- File encoding helpers ---
+
+export function fileToDataUri(file: File): Promise<string> {
+  return new Promise((resolve, reject) => {
+    const reader = new FileReader();
+    reader.onload = () => resolve(reader.result as string);
+    reader.onerror = () => reject(new Error("Failed to read file"));
+    reader.readAsDataURL(file);
+  });
+}
+
+export async function urlToDataUri(url: string): Promise<string> {
+  const res = await fetch(url);
+  const blob = await res.blob();
+  return new Promise((resolve, reject) => {
+    const reader = new FileReader();
+    reader.onload = () => resolve(reader.result as string);
+    reader.onerror = () => reject(new Error("Failed to encode file"));
+    reader.readAsDataURL(blob);
+  });
+}
+
+// --- High-level AI features ---
+
+export async function classify(
+  text: string,
+  categories: string[]
+): Promise<{ category: string; confidence: number }> {
+  return safeJsonCompletion([
+    {
+      role: "system",
+      content: [
+        "You are a classifier. Respond ONLY with valid JSON, nothing else.",
+        'Output format: {"category": "<one of the allowed categories>", "confidence": <0-1>}',
+        `Allowed categories: ${JSON.stringify(categories)}`,
+      ].join("\n"),
+    },
+    { role: "user", content: text },
+  ], { temperature: 0 });
+}
+
+export async function extract<T = Record<string, unknown>>(
+  text: string,
+  schemaDescription: string
+): Promise<T> {
+  return safeJsonCompletion([
+    {
+      role: "system",
+      content: [
+        "You are a data extraction engine. Respond ONLY with valid JSON matching the requested schema.",
+        "If a field cannot be determined from the input, use null.",
+        `Schema:\n${schemaDescription}`,
+      ].join("\n"),
+    },
+    { role: "user", content: text },
+  ], { temperature: 0 });
+}
+
+export async function summarize(
+  text: string,
+  options: { maxSentences?: number; language?: string } = {}
+): Promise<string> {
+  const { maxSentences = 3, language } = options;
+  const instructions = [
+    `Summarize the following text in at most ${maxSentences} sentences.`,
+    "Be concise and preserve key facts.",
+  ];
+  if (language) instructions.push(`Write the summary in ${language}.`);
+  return chatCompletion([
+    { role: "system", content: instructions.join(" ") },
+    { role: "user", content: text },
+  ]);
+}
+
+export async function translate(
+  text: string,
+  targetLanguage: string,
+  sourceLanguage?: string
+): Promise<string> {
+  const from = sourceLanguage ? ` from ${sourceLanguage}` : "";
+  return chatCompletion([
+    {
+      role: "system",
+      content: `Translate the following text${from} to ${targetLanguage}. Output ONLY the translation, nothing else.`,
+    },
+    { role: "user", content: text },
+  ]);
+}
+
+export async function analyzeImage(imageDataUri: string, prompt: string): Promise<string> {
+  return chatCompletion([
+    {
+      role: "user",
+      content: [
+        { type: "text", text: prompt },
+        { type: "image_url", image_url: { url: imageDataUri } },
+      ],
+    },
+  ]);
+}
+
+export async function analyzeDocument(fileDataUri: string, prompt: string): Promise<string> {
+  return chatCompletion([
+    {
+      role: "user",
+      content: [
+        { type: "text", text: prompt },
+        { type: "file", file: { file_data: fileDataUri } },
+      ],
+    },
+  ]);
+}
+
+export async function extractFromPhoto<T = Record<string, unknown>>(
+  imageDataUri: string,
+  schemaDescription: string
+): Promise<T> {
+  return safeJsonCompletion([
+    {
+      role: "system",
+      content: [
+        "Extract structured data from the provided image.",
+        "Respond ONLY with valid JSON matching the schema.",
+        "Use null for any field that cannot be determined.",
+        `Schema:\n${schemaDescription}`,
+      ].join("\n"),
+    },
+    {
+      role: "user",
+      content: [
+        { type: "text", text: "Extract the data from this image." },
+        { type: "image_url", image_url: { url: imageDataUri } },
+      ],
+    },
+  ]);
+}
+
+```
+
+## src/lib/chat-context.ts
+```
+export const CHAT_SYSTEM_PROMPT = `Du bist ein hilfreicher Assistent für diese App.\n\nDie App verwaltet folgende Daten:\n- Mitarbeiter: Vorname, Nachname, E-Mail\n- Produktionsbereich: Name\n- Anlagenteiltyp: Name\n- Anlage: Name, Produktionsbereich (→ Produktionsbereich), Geografischer Ort der Anlage, Betriebsstunden, Datum der Fertigstellung (Datum)\n- Anlagenteil: Name, Typ (→ Anlagenteiltyp), Anlage (→ Anlage), Geografischer Ort des Anlagenteils, Verbau-Datum (Datum)\n- Baugruppe: Name, Anlagenteil (→ Anlagenteil), Anlagenteiltyp (→ Anlagenteiltyp)\n- Störungsmeldung: Datum (Datum), Erfasser (→ Mitarbeiter), Standort der Störung, Produktionsbereich (→ Produktionsbereich), Anlage (→ Anlage), Anlagenteil (→ Anlagenteil), Baugruppe (→ Baugruppe), Beschreibung, Foto, Dringlichkeit, Erledigt (ja/nein)\n- Korrespondenz: Edit Key 1, Edit Key 2, Edit Key Timeout 1 (Datum), Edit Key Timeout 2 (Datum), Titel, Betreff, E-Mail-Adresse 1, E-Mail-Adresse 2, Label Mine 1, Label Mine 2, Label Yours 1, Label Yours 2, Icon 1, Icon 2, Störungsmeldung (→ Störungsmeldung)\n- Nachrichten: Korrespondenz (→ Korrespondenz), Ersteller, Text, Datei\n- Details: Produktionsbereich (→ Produktionsbereich), Anlage (→ Anlage), Anlagenteiltyp (→ Anlagenteiltyp), Anlagenteil (→ Anlagenteil), Baugruppe (→ Baugruppe), Bezeichnung, Beschreibung, Datei\n\nDu kannst:\n- Fragen zur App und den Daten beantworten\n- Hochgeladene Bilder und Dokumente analysieren\n- Texte zusammenfassen oder übersetzen\n- Bei der Dateneingabe helfen\n\nAntworte kurz und präzise. Verwende die gleiche Sprache wie der Nutzer.`;
+
+```
+
+## src/config/ai-features.ts
+```
+/**
+ * AI feature toggles per entity.
+ * Set to true to show "Foto scannen" button in the create/edit dialog.
+ * The agent can change these values — all other AI files are pre-generated.
+ */
+
+export const AI_PHOTO_SCAN: Record<string, boolean> = {
+  Mitarbeiter: true,
+  Produktionsbereich: true,
+  Anlagenteiltyp: true,
+  Anlage: true,
+  Anlagenteil: true,
+  Baugruppe: true,
+  Stoerungsmeldung: true,
+  Korrespondenz: true,
+  Nachrichten: true,
+  Details: true,
+};
+```
